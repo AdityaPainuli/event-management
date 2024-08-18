@@ -1,5 +1,5 @@
 datasource db {
-  provider = "postgresql" // Or "mysql", "sqlite", etc.
+  provider = "postgresql" 
   url      = env("DATABASE_URL")
 }
 
@@ -21,7 +21,7 @@ model Event {
   description  String
   date         DateTime
   performances Performance[]
-  createdBy    User          @relation("UserEvents", fields: [createdById], references: [id])
+  createdBy    User          @relation("UserEvents", fields: [createdById], references: [id],onDelete: Cascade)
   createdById  Int
 }
 
@@ -30,6 +30,6 @@ model Performance {
   title         String
   description   String
   googleFormUrl String
-  event         Event  @relation(fields: [eventId], references: [id])
+  event         Event  @relation(fields: [eventId], references: [id],onDelete: Cascade)
   eventId       Int
 }

@@ -1,4 +1,3 @@
-// src/middleware/auth.ts
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
@@ -17,9 +16,8 @@ export const isAdmin = (req: AuthRequest, res: Response, next: NextFunction) => 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as any;
 
-    req.userId = decoded.userId;   // Attach userId to the request object
-    req.isAdmin = decoded.isAdmin; // Attach isAdmin to the request object
-
+    req.userId = decoded.userId;   
+    req.isAdmin = decoded.isAdmin; 
     if (req.isAdmin) {
       next();
     } else {
